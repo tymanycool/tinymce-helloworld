@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>{#prettify_dlg.title}</title>
+	<script type="text/javascript" src="../../tiny_mce_popup.js"></script>
+	<script type="text/javascript" src="plugin.js"></script>
+	<style type="text/css" media="screen">
+		input {
+			vertical-align: middle;
+		}
+		label {
+			vertical-align: middle;
+		}
+		fieldset {
+			margin-bottom: 10px;
+		}
+		textarea {
+			width: 100%; 
+			height: 100%; 
+			font-family: 'Courier New',Courier,mono; 
+			font-size: 12px;
+		}
+	</style>
+</head>
+<body>
+<form onsubmit="PrettifyDialog.insert(); return false;" action="#">
+	<fieldset>
+		<legend>{#prettify_dlg.paste}</legend>
+		<textarea name="prettify_code" id="prettify_code" rows="15" cols="100" class="mceFocus"></textarea>
+	</fieldset>
+
+	<fieldset id="prettify_options">
+		<legend>{#prettify_dlg.options_title}</legend>
+	
+		<table border="0" width="100%">
+		<tr>
+			<td><input type="checkbox" name="prettify_linenums" id="prettify_linenums" checked="checked" /><label for="prettify_linenums" >{#prettify_dlg.linenums}</label></td>
+		</tr>
+		</table>	
+	</fieldset>
+
+	<div class="mceActionPanel">
+		<div style="float: left">
+			<input type="submit" id="insert" name="insert" value="{#insert}" />
+		</div>
+		<div style="float: right">
+			<input type="button" id="cancel" name="cancel" value="{#cancel}" onclick="tinyMCEPopup.close();" />
+		</div>
+	</div>
+</form>
+</body>
+</html>

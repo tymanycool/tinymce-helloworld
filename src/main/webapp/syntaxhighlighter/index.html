@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Hello SyntaxHighlighter</title>
+	<script type="text/javascript" src="scripts/shCore.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="scripts/shBrushJava.js"></script>
+	<link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/>
+
+	<script type="text/javascript">
+        //SyntaxHighlighter.config.clipboardSwf = 'scripts/clipboard.swf';
+        SyntaxHighlighter.config.strings = {
+            expandSource:'展开代码',
+            viewSource : '查看代码',
+            copyToClipboard:'复制代码',
+            copyToClipboardConfirmation : '代码复制成功',
+            print:'打印',
+            help:'?',
+            alert:'语法高亮',
+            noBrush:'不能找到刷子: ',
+            brushNotHtmlScript:'刷子没有配置html-script选项'
+        };
+        SyntaxHighlighter.all();
+	</script>
+</head>
+
+<body style="width:900px;">
+
+<h1>Hello SyntaxHighlighter</h1>
+<pre class="brush:js;">
+	function helloSyntaxHighlighter()
+	{
+		return "hi!";
+	}
+	function helloSyntaxHighlighter2()
+	{
+		return "hi!";
+	}
+	function helloSyntaxHighlighter()
+	{
+		return "hi!";
+	}
+	function helloSyntaxHighlighter2()
+	{
+		return "hi!";
+	}
+</pre>
+<pre class="brush:js;">
+	function helloSyntaxHighlighter()
+	{
+		return "hi!";
+	}
+	function helloSyntaxHighlighter2()
+	{
+		return "hi!";
+	}
+</pre>
+<pre class="brush:java;">
+package com.tiany.util;
+
+import com.tiany.exception.NotSupportException;
+
+public abstract class BitUtil {
+	/**
+	 * 返回index位上的二进制数值 :false表示0,true表示1
+	 *
+	 * @param index
+	 *            位置
+	 * @param value
+	 *            操作数
+	 * @return 返回index位上的二进制数值,index 取值在[1,8]
+	 */
+	public static boolean getBit(byte value, int index) throws IllegalArgumentException {
+		if (index < 1 || index > 8) {
+			throw new IllegalArgumentException("index 取值在[1,8]");
+		}
+		return 1 == (value >> index - 1 & 1);// - 优先级大于 >> 优先级大于 &
+	}
+
+	/**
+	 * 返回index位上的二进制数值 :false表示0,true表示1
+	 *
+	 * @param index
+	 *            位置
+	 * @param value
+	 *            操作数
+	 * @return 返回index位上的二进制数值,index 取值在[1,32]
+	 */
+	public static boolean getBit(int value, int index) throws IllegalArgumentException {
+		if (index < 1 || index > 32) {
+			throw new IllegalArgumentException("index 取值在[1,32]");
+		}
+		return 1 == (value >> index - 1 & 1);// - 优先级大于 >> 优先级大于 &
+	}
+
+	/**
+	 * 返回index位上的二进制数值 :false表示0,true表示1
+	 *
+	 * @param index
+	 *            位置
+	 * @param value
+	 *            操作数
+	 * @return 返回index位上的二进制数值,index 取值在[1,64]
+	 */
+	public static boolean getBit(long value, int index) throws IllegalArgumentException {
+		if (index < 1 || index > 64) {
+			throw new IllegalArgumentException("index 取值在[1,64]");
+		}
+		return 1 == (value >> index - 1 & 1);// - 优先级大于 >> 优先级大于 &
+	}
+
+	/**
+	 * 返回index位上的二进制数值 :false表示0,true表示1
+	 *
+	 * @param index
+	 *            位置
+	 * @param value
+	 *            操作数
+	 * @return 返回index位上的二进制数值,index 取值在[1,16]
+	 */
+	public static boolean getBit(short value, int index) throws IllegalArgumentException {
+		assert index >= 1 && index <= 16 : "index >= 1 并且 index <= 16";
+		if (index < 1 || index > 16) {
+			throw new IllegalArgumentException("index 取值在[1,16]");
+		}
+		return 1 == (value >> index - 1 & 1);// - 优先级大于 >> 优先级大于 &
+	}
+
+	/**
+	 * 得到二进制表示的字符串对应的int(十进制).
+	 *
+	 * <pre>
+	 * 被StringUtil中的{@link StringUtil #getIntByBinaryString(String)},
+	 * {@link StringUtil #getIntByBinary(String)}替代
+	 * </pre>
+	 *
+	 * @param bitStr
+	 *            value对应的原码
+	 * @return 二进制表示的字符串对应的int(十进制)
+	 * @link StringUtil
+	 */
+	@Deprecated
+	public static int getInt(String bitStr) throws NotSupportException {
+		if (bitStr.length() > 31 || bitStr.length() == 0) {
+			throw new NotSupportException("bitStr 不能转换");
+		}
+		int rt = 0;
+		for (int i = bitStr.length() - 1, j = 0; i >= 0; i--, j++) {
+			switch (bitStr.charAt(i)) {
+			case '1':
+				rt += 1 << j;
+				break;
+			case '0':
+				break;
+			default:
+				throw new NotSupportException("bitStr 不能转换");
+			}
+		}
+		return rt;
+	}
+
+	/**
+	 * 设置value上某一位的值: false表示0,true表示1
+	 *
+	 * @param value
+	 *            操作数
+	 * @param index
+	 *            位置,index 取值在[1,8]
+	 * @param bool
+	 *            true表示1,false表示0
+	 * @return 返回结果
+	 */
+	public static byte setBit(byte value, int index, boolean bool) throws IllegalArgumentException {
+		if (index < 1 || index > 8) {
+			throw new IllegalArgumentException("index 取值在[1,8]");
+		}
+		return (byte) (bool ? 1 << (index - 1) | value : ~(1 << index - 1) & value);
+	}
+
+	/**
+	 * 设置value上某一位的值: false表示0,true表示1
+	 *
+	 * @param value
+	 *            操作数
+	 * @param index
+	 *            位置,index 取值在[1,32]
+	 * @param bool
+	 *            true表示1,false表示0
+	 * @return 返回结果
+	 */
+	public static int setBit(int value, int index, boolean bool) throws IllegalArgumentException {
+		if (index < 1 || index > 32) {
+			throw new IllegalArgumentException("index 取值在[1,32]");
+		}
+		return bool ? 1 << (index - 1) | value : ~(1 << index - 1) & value;
+	}
+
+	/**
+	 * 设置value上某一位的值: false表示0,true表示1
+	 *
+	 * @param value
+	 *            操作数
+	 * @param index
+	 *            位置,index 取值在[1,64]
+	 * @param bool
+	 *            true表示1,false表示0
+	 * @return 返回结果
+	 */
+	public static long setBit(long value, int index, boolean bool) throws IllegalArgumentException {
+		if (index < 1 || index > 64) {
+			throw new IllegalArgumentException("index 取值在[1,64]");
+		}
+		return bool ? 1L << (index - 1) | value : ~(1L << index - 1) & value;// L不能少因为会精度损失
+	}
+
+	/**
+	 * 设置value上某一位的值: false表示0,true表示1
+	 *
+	 * @param value
+	 *            操作数
+	 * @param index
+	 *            位置,index 取值在[1,16]
+	 * @param bool
+	 *            true表示1,false表示0
+	 * @return 返回结果
+	 */
+	public static short setBit(short value, int index, boolean bool) throws IllegalArgumentException {
+		if (index < 1 || index > 16) {
+			throw new IllegalArgumentException("index 取值在[1,16]");
+		}
+		return (short) (bool ? 1 << (index - 1) | value : ~(1 << index - 1) & value);
+	}
+
+}
+
+</pre>
+
+</html>
